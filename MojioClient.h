@@ -10,38 +10,28 @@
 
 @interface MojioClient : NSObject
 
-//@property (strong, nonatomic) NSString *appID, *secretKey, *apiToken;
 @property int pagesize;
+@property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
 
--(NSString*)getAPIToken:(NSString*)username AndPassword:(NSString*)password;
+-(void) initialize;
+-(NSString*)getAPITokenWithUsername:(NSString*)username AndPassword:(NSString*)password;
 -(NSMutableDictionary*)getTripData;
--(NSMutableDictionary*)getEventDataForTrip:(NSString*)tripID;
+-(NSMutableDictionary*)getEventDataForTripWithTripID:(NSString*)tripID;
 -(NSMutableDictionary*)getUserData;
 -(NSMutableDictionary*)getDevices;
-
 -(BOOL)isUserLoggedIn;
+-(BOOL)storeMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data;
+-(NSString*)getStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key;
+-(BOOL)deleteStoredMojioWithDeviceID:(NSString*)deviceID andKey:(NSString*)key;
 
-
--(BOOL)storeMojio:(NSString*)deviceID andKey:(NSString*)key andValue:(NSDictionary*)data;
--(NSString*)getStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
--(BOOL)deleteStoredMojio:(NSString*)deviceID andKey:(NSString*)key;
-
-
-
-
-// CLEANING IN PROCESS
-@property (nonatomic) NSString *Mojio, *appID, *secretKey, *apiToken, *minutes;
--(void) initialize;
--(NSString*) getURL:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
-
-
--(NSData*)sendRequest:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method;
-
--(NSString*)dataByMethodDict:(NSDictionary*)dict andMethod:(NSString*) method;
-
--(NSData*)get:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
-
--(BOOL)put:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
+    
+// internal methods
+-(NSString*) getURLWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key;
+-(NSData*)sendRequestWithURL:(NSString*)url andData:(NSString*) data andMethod:(NSString*) method andPageSize:(NSString*)pageSize;
+-(NSString*)dataByMethodDictWithDict:(NSDictionary*)dict andMethod:(NSString*)method;
+-(NSData*)getWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andPageSize:(NSString*)pageSize;
+-(BOOL)putWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
+-(BOOL)postWithController:(NSString*)controller andID:(NSString*)ID andAction:(NSString*)action andKey:(NSString*)key andData:(NSDictionary*)data;
 
 
 @end
