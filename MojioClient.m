@@ -255,7 +255,7 @@
         
         NSString *escaped = [[jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]stringByReplacingOccurrencesOfString:@"\n" withString:@"\\\\n"];
         
-        return jsonString;
+        return escaped;
     }
 }
 
